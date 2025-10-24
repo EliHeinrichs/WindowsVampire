@@ -243,9 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e197bf07930135c4999028903b9b0b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDistance: 0
-  viewAngle: 0
-  speed: 0
+  viewDistance: 1
+  speed: 1
   currentState: 0
 --- !u!4 &2045104002
 Transform:
