@@ -49,7 +49,7 @@ public class IndoorAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distToPoint = Distance(transform.position, checkPoints[currentCheckPointIndex].position);
+      
         HandleCurrentState();
         
     }
@@ -100,28 +100,7 @@ public class IndoorAI : MonoBehaviour
 
     void UpdateWandering()
     {
-        RaycastHit2D hitPlayer = Physics2D.Linecast(transform.position ,moveDirection * viewDistance, playerLayer );
-        if (hitPlayer)
-        {
 
-            RaycastHit2D hitWall = Physics2D.Linecast(transform.position, moveDirection * viewDistance, hitLayer);
-            // if hit, then we update the move direction to follow  a slide direction, which gets the hit point and normalizes the perendicular direction, then using a dot product it evaluates if the slide direction or the inverse are in closer trajectory to the move direction
-            if (hitWall)
-            {
-                Vector2 slideDir = Vector2.Perpendicular(hitWall.normal).normalized;
-                moveDirection = Vector2.Dot(slideDir, moveDirection) > 0 ? slideDir : -slideDir;
-                if (DEBUGMODE)
-                {
-                    Debug.DrawRay(transform.position, moveDirection * viewDistance, Color.cyan);
-
-                }
-            }
-            else
-            {
-                // if nothing is hit, then move towards the currentclick
-                moveDirection = (currentClick - controller.GetRB().position).normalized;
-            }
-        }
 
     }
 
