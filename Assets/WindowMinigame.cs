@@ -8,12 +8,14 @@ public class WindowMinigame : MonoBehaviour
 
     public float speedMultiplier  = 1f;
     public float maxPowerBar = 10;
-
-    public float windowClosesPercentRange = 0.1f;
-    public float windowSlammedPercentRange = 0.2f;
-    public int windowSlightlyMovesIntervals = 3;
+    public float windowClosesRange = 1;
+    public float centrePointPercentPlacement = 0.75f;
     private float currentPower = 0.1f;
     public Slider powerSlider;
+    
+    public Color rangeColor = Color.green;
+    public Color furthestColor = Color.red;
+    private Color currentColor;
     
     
     
@@ -39,21 +41,26 @@ public class WindowMinigame : MonoBehaviour
             
             speedMultiplier = -speedMultiplier;
         }
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            float midPoint = (maxPowerBar - (maxPowerBar * windowSlammedPercentRange)) / 2  ;
-            if (currentPower >= midPoint && currentPower <= midPoint + (maxPowerBar * windowClosesPercentRange))
-            {
+        currentColor = Color.Lerp(furthestColor, rangeColor,0.1f) * Time.deltaTime * speedMultiplier;
+             
+     
+            float centrePoint = maxPowerBar * centrePointPercentPlacement  ;
+            if (currentPower >= (centrePoint - windowClosesRange) && (currentPower <= (centrePoint + windowClosesRange)))
+            { 
+               
                 
                 Debug.Log("You won!");
                 
             }
+            else
+            {
+               
+            }
             
-        }
+            
         
         
+            powerSlider.fillRect.gameObject.GetComponent<Image>().color = currentColor;
         powerSlider.value = currentPower;
         
     }
