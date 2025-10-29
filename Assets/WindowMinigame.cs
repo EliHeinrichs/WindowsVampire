@@ -6,62 +6,59 @@ using UnityEngine.UI;
 public class WindowMinigame : MonoBehaviour
 {
 
-    public float speedMultiplier  = 1f;
-    public float maxPowerBar = 10;
-    public float windowClosesRange = 1;
-    public float centrePointPercentPlacement = 0.75f;
-    private float currentPower = 0.1f;
-    public Slider powerSlider;
-    
-    public Color rangeColor = Color.green;
-    public Color furthestColor = Color.red;
-    private Color currentColor;
-    
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        powerSlider.maxValue = maxPowerBar;
-    }
+   public int maxRandomPresses = 20;
+   public int minRandomPresses = 12;
+   private int neededPresses;
+   private int currentPresses = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        currentPower += Time.deltaTime * speedMultiplier;
+   public float maxTime = 10;
+   private float currentTime = 10;
 
-        if (currentPower >= maxPowerBar)
-        {
-            speedMultiplier = -speedMultiplier;
+   private void OnEnable()
+   {  
+      currentTime = maxTime;
+      currentPresses = 0;
+      neededPresses = Random.Range(minRandomPresses, maxRandomPresses);
+    
+      
+   }
 
-        }
-
-        if (currentPower <= 0)
-        {
-            
-            speedMultiplier = -speedMultiplier;
-        }
-        currentColor = Color.Lerp(furthestColor, rangeColor,0.1f) * Time.deltaTime * speedMultiplier;
-             
-     
-            float centrePoint = maxPowerBar * centrePointPercentPlacement  ;
-            if (currentPower >= (centrePoint - windowClosesRange) && (currentPower <= (centrePoint + windowClosesRange)))
-            { 
-               
-                
-                //Debug.Log("You won!");
-                
-            }
-            else
-            {
-               
-            }
-            
-            
+   void Update()
+   {
+      if (Input.anyKeyDown)
+      {
+         PressedEvent();
+      }
+      
+  
+      
+      if (0 >= currentTime)
+      {
+         Debug.Log("You lose");
+         ClosePanel();
         
-        
-            powerSlider.fillRect.gameObject.GetComponent<Image>().color = currentColor;
-        powerSlider.value = currentPower;
-        
-    }
+      }
+      
+      currentTime -= Time.deltaTime;
+      
+      
+   }
+   void ClosePanel()
+   {
+      gameObject.SetActive(false);
+   }
+
+
+   void PressedEvent()
+   {
+      currentPresses += 1;
+         
+      if (currentPresses >= maxRandomPresses)
+      {
+         Debug.Log("You Win");
+         ClosePanel();
+      }
+      
+   }
+
 }

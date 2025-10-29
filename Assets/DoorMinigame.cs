@@ -1,82 +1,147 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 public class DoorMinigame : MonoBehaviour
 {
 
     public float blockSizeRange = 10f;
     public float blockHeight = 10f;
     public int totalBlocks = 5;
-    
     public float speedMuliplier = 200f;
     
     public float clickCooldown = 1f;
-
+    private float clickTimer = 1;
+    
     public Image spinSprite;
     
-    public  List<float> blocks = new List<float>();
+    private  Dictionary<float,Image> blocks = new Dictionary<float, Image>();
     
     private float currentAngle = 0f;
 
     public Image slotImage;
-    
+    public RectTransform startRectTransform;
+
+    private bool reverseSpin = false;
+
+
+    public void CloseMinigame()
+    {
+           
+        gameObject.SetActive(false);
+        
+        
+    }
+
+    public bool wonGame()
+    {
+
+        if (blocks.Keys.Count > 0)
+        {
+            return false;
+        }
+        return true;
+        
+    }
     
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        for (int i = 0; i < totalBlocks; i++)
+
+   
+       GenerateAngles();
+
+    }
+
+   
+    
+    
+
+    void GenerateAngles()
+    {
+        blocks.Clear(); 
+        for (int i = 0; i <= totalBlocks; i++)
         {
-            float angle = Random.Range(0, 360);
-            
-            blocks.Add(angle);
-           
-            slotImage.rectTransform.sizeDelta = new Vector2(blockSizeRange, blockHeight);
-            slotImage.rectTransform.localRotation =  Quaternion.Euler(0f, 0f, angle);
-            
+                float angle = Random.Range(0, 360);
 
 
+                Image slot = Instantiate(slotImage, startRectTransform);
+
+                slot.name = "slot" + i;
+                blocks.Add(angle,slot);
+                Debug.Log(blocks.Keys);
+                slot.rectTransform.anchoredPosition = startRectTransform.anchoredPosition;
+               
+              
+                slot.rectTransform.sizeDelta = new Vector2(blockSizeRange * 2, blockHeight);
+                slot.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
+                
+                slot.gameObject.SetActive(true);
+            
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentAngle += Time.deltaTime * speedMuliplier;
+       clickTimer -= Time.deltaTime;
 
-        if (currentAngle >= 360) 
+        if (reverseSpin)
+        {
+               currentAngle -= Time.deltaTime * speedMuliplier;
+        }
+        else
+        {
+            currentAngle += Time.deltaTime * speedMuliplier;
+        }
+        
+        if (currentAngle >= 360 && !reverseSpin) 
         {
             currentAngle = 0;
         }
-        
+
+        if (currentAngle <= 0 && reverseSpin)
+        {
+            currentAngle = 360;
+        }
         spinSprite.rectTransform.rotation = Quaternion.Euler(0f, 0f, currentAngle);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.anyKeyDown && clickTimer <= 0)
         {
             Debug.Log(currentAngle);
-            if(HitBlock())
-            {
-                Debug.Log("Block Hit");
-                
-            }
+            reverseSpin = !reverseSpin;
+            HitBlock();
+
         }
         //controller.transform . rotation = Quaternion . AngleAxis (angle - 90 , Vector3 . forward);
-    }
-
-    bool HitBlock()
+    } 
+    
+    void HitBlock()
     {
-        bool returnValue = false;
-        foreach (float block in blocks)
+        foreach (KeyValuePair<float,Image> block in blocks)
         {
-            if (currentAngle < (block + blockSizeRange) && currentAngle > (block - blockSizeRange))
+            if (currentAngle < (block.Key + blockSizeRange) && currentAngle > (block.Key - blockSizeRange))
             {
-                returnValue = true;
+                Destroy(block.Value.gameObject);    
+                blocks.Remove(block.Key);
+                if (wonGame())
+                {
+                    CloseMinigame();
+                }
+   
+            }
+            else
+            {
+                clickTimer = clickCooldown; 
             }
             
         }
 
-        return returnValue;
+    
     }
 }
