@@ -6,13 +6,15 @@ public class GameController : MonoBehaviour
 {
     public Pawn playerPawn;
     public PlayerController playerController;
-    
-    
-
+    public WireController wireController;
+   
     void Start()
     {
         //Setting the pawn for the player to control
-        playerController.Possess(playerPawn);
-       
+        if(playerController != null)
+            playerController.Possess(playerPawn);
+        
+        if(wireController != null)
+            wireController.Possess(playerPawn);
     }
 }
