@@ -49,7 +49,7 @@ public class WindowMinigame : MonoBehaviour
             { 
                
                 
-                Debug.Log("You won!");
+                //Debug.Log("You won!");
                 
             }
             else
