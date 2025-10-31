@@ -29,6 +29,7 @@ public class DoorMinigame : MonoBehaviour
     private bool reverseSpin = false;
 
 
+
     public void CloseMinigame()
     {
            
