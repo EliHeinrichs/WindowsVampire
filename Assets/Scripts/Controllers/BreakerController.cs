@@ -6,24 +6,48 @@ public class BreakerController : MonoBehaviour
 {
     public Pawn wirePawn;   
     public WireController wireController;
-    public GameObject prefab;
+    public GameObject minigame;
     public TrailRenderer wireTrail;
+    public WireExit[] WireExits;
+    public PlayerController playerController;
     void Start()
     {                  
-        if(wireController != null)
-            wireController.Possess(wirePawn);
-
-        StartGame();
+        
     }
 
     void Update()
     {
         ListenForInput();
+        CheckIfReachedEnd();
+    }
+
+    private void CheckIfReachedEnd()
+    {
+        foreach (WireExit wireExits in WireExits)
+        {
+            if (wireExits.reachedEnd)
+            {
+                minigame.SetActive(false);
+                playerController.ToggleMovement(true);
+            }               
+        }
     }
 
     public void StartGame()
     {
-        
+        playerController.ToggleMovement(false);
+        foreach (WireExit wireExits in WireExits)
+        {
+            if (wireExits.reachedEnd)
+                wireExits.reachedEnd = false;
+        }
+
+        if (!minigame.activeSelf)
+            minigame.SetActive(true);
+
+        if (wireController != null)
+            wireController.Possess(wirePawn);
+
         wirePawn.ResetPosition();
         wireController.ResetMovementFloats();
         wireTrail.Clear();
@@ -31,9 +55,10 @@ public class BreakerController : MonoBehaviour
 
     private void ListenForInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && minigame.activeSelf)
         {
-            prefab.SetActive(false);
+            minigame.SetActive(false);
+            playerController.ToggleMovement(true);
         }
-    }
+    } 
 }

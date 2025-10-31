@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDisplay : AbstractObject
-{
-    public SpriteRenderer spriteRenderer;
-
+{  
     public EnemyPatrolStateMachine enemyStateMachine;
 
     private void GetAndDisplayEnemyPosition()
@@ -52,12 +50,10 @@ public class EnemyDisplay : AbstractObject
     }
     private void Update()
     {
-        GetAndDisplayEnemyPosition();
-
-        if (!active)
-            spriteRenderer.color = Color.black;
-
         if (active)
             spriteRenderer.color = Color.blue;
+        else 
+            spriteRenderer.color = Color.black;
+        GetAndDisplayEnemyPosition();
     }
 }

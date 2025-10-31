@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2063371048984816729}
   - component: {fileID: 6602136406498399093}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 5194406257576336738}
   - component: {fileID: 5831562793229016030}
   - component: {fileID: 6625182983104753255}
-  - component: {fileID: 5752030822888103200}
-  m_Layer: 0
+  - component: {fileID: 1547933658824209700}
+  m_Layer: 8
   m_Name: Player Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +149,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   hitbox: {fileID: 6625182983104753255}
+  defaultPosition: {x: 0, y: 0}
 --- !u!61 &6625182983104753255
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -178,10 +179,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0055681467, y: 0}
+  m_Offset: {x: 0.002067387, y: 0.0030068457}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -192,9 +193,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40977168, y: 0.88863623}
+  m_Size: {x: 0.73563707, y: 0.98228604}
   m_EdgeRadius: 0
---- !u!50 &5752030822888103200
+--- !u!50 &1547933658824209700
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -206,10 +207,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -220,4 +221,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

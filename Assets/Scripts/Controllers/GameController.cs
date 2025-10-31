@@ -13,8 +13,6 @@ public class GameController : MonoBehaviour
         //Setting the pawn for the player to control
         if(playerController != null)
             playerController.Possess(playerPawn);
-        
-        if(wireController != null)
-            wireController.Possess(playerPawn);
+               
     }
 }
