@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPawn: {fileID: 380526528}
   playerController: {fileID: 380526529}
+  wireController: {fileID: 0}
 --- !u!4 &106252042
 Transform:
   m_ObjectHideFlags: 0
