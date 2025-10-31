@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class DayNight : MonoBehaviour
 {
+    [SerializeField]
+    private float dayDuration;
+    [SerializeField]
+    private float nightDuration;
 
-    public float dayDuration;
-    public float nightDuration;
-
-    public float currentTimer;
     
-    public timeOfDay dayOrNight;
-    public enum timeOfDay
+    public float currentTimer;
+    [SerializeField]
+    private timeOfDay dayOrNight;
+    
+    [SerializeField]
+    private List<GameObject> nightObjects;
+    
+    [SerializeField]
+    private List<GameObject> dayObjects;
+    
+    private enum timeOfDay
     {
         Day,
         Night,
@@ -26,7 +35,21 @@ public class DayNight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTimer -= Time.deltaTime;
+       
+        if (dayOrNight == timeOfDay.Day && currentTimer >= dayDuration)
+        {
+            
+        }
+        else if (dayOrNight == timeOfDay.Night && currentTimer >= nightDuration)
+        {
+            
+        }
+        else
+        {
+            currentTimer += Time.deltaTime;
+
+        }
+        
         
         
     }
