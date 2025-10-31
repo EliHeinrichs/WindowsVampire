@@ -46,6 +46,6 @@ public class Pawn : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.position = defaultPosition;
+        transform.localPosition = defaultPosition;
     }
 }

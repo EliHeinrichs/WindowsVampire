@@ -7,6 +7,8 @@ public abstract class Controller : MonoBehaviour
     
     protected Pawn pawn;
 
+    private bool movementEnabled = true;
+
     //Setting the pawn and giving it a controller
     public virtual void Possess(Pawn pawnToControl)
     {
@@ -26,7 +28,13 @@ public abstract class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (movementEnabled) 
+            Move();
+    }
+
+    public void ToggleMovement(bool toggle)
+    {
+        movementEnabled = toggle;
     }
 
     //Getting a vector from GetMoveInput and using that to move the pawn
