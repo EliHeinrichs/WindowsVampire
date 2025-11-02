@@ -28,35 +28,36 @@ public class DoorMinigame : MonoBehaviour
 
     private bool reverseSpin = false;
 
+    public Door attachedDoor;
+
+    public PlayerController playerController;
 
 
     public void CloseMinigame()
-    {
-           
+    {      
         gameObject.SetActive(false);
-        
-        
+        playerController.ToggleMovement(true);
     }
 
     public bool wonGame()
-    {
-
+    {       
         if (blocks.Keys.Count > 0)
-        {
+        {    
             return false;
         }
-        return true;
-        
+        else
+        {
+            attachedDoor.active = true;
+            return true;
+        }            
     }
     
     
     // Start is called before the first frame update
     void OnEnable()
     {
-
-   
-       GenerateAngles();
-
+        playerController.ToggleMovement(false);
+        GenerateAngles();
     }
 
    
@@ -65,25 +66,25 @@ public class DoorMinigame : MonoBehaviour
 
     void GenerateAngles()
     {
-        blocks.Clear(); 
+        blocks.Clear();
         for (int i = 0; i <= totalBlocks; i++)
         {
-                float angle = Random.Range(0, 360);
+            float angle = Random.Range(0, 360);
 
 
-                Image slot = Instantiate(slotImage, startRectTransform);
+            Image slot = Instantiate(slotImage, startRectTransform);
 
-                slot.name = "slot" + i;
-                blocks.Add(angle,slot);
-                Debug.Log(blocks.Keys);
-                slot.rectTransform.anchoredPosition = startRectTransform.anchoredPosition;
-               
-              
-                slot.rectTransform.sizeDelta = new Vector2(blockSizeRange * 2, blockHeight);
-                slot.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
-                
-                slot.gameObject.SetActive(true);
-            
+            slot.name = "slot" + i;
+            blocks.Add(angle, slot);
+            Debug.Log(blocks.Keys);
+            slot.rectTransform.anchoredPosition = startRectTransform.anchoredPosition;
+
+
+            slot.rectTransform.sizeDelta = new Vector2(blockSizeRange * 2, blockHeight);
+            slot.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
+
+            slot.gameObject.SetActive(true);
+
         }
     }
 
