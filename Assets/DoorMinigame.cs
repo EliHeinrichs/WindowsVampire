@@ -32,6 +32,7 @@ public class DoorMinigame : MonoBehaviour
 
     public PlayerController playerController;
 
+
     public void CloseMinigame()
     {      
         gameObject.SetActive(false);
