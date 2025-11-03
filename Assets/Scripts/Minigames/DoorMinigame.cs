@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+
 public class DoorMinigame : MonoBehaviour
 {
 
@@ -29,15 +30,9 @@ public class DoorMinigame : MonoBehaviour
     private bool reverseSpin = false;
 
     public Door attachedDoor;
+    
 
-    public PlayerController playerController;
-
-    public void CloseMinigame()
-    {      
-        gameObject.SetActive(false);
-        playerController.ToggleMovement(true);
-    }
-
+  
     public bool wonGame()
     {       
         if (blocks.Keys.Count > 0)
@@ -55,11 +50,14 @@ public class DoorMinigame : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        playerController.ToggleMovement(false);
-        GenerateAngles();
+        
+        StartGame();
     }
 
-   
+    public void StartGame()
+    {
+        GenerateAngles();
+    }
     
     
 
@@ -69,16 +67,11 @@ public class DoorMinigame : MonoBehaviour
         for (int i = 0; i <= totalBlocks; i++)
         {
             float angle = Random.Range(0, 360);
-
-
             Image slot = Instantiate(slotImage, startRectTransform);
-
             slot.name = "slot" + i;
             blocks.Add(angle, slot);
             Debug.Log(blocks.Keys);
             slot.rectTransform.anchoredPosition = startRectTransform.anchoredPosition;
-
-
             slot.rectTransform.sizeDelta = new Vector2(blockSizeRange * 2, blockHeight);
             slot.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
 
@@ -132,7 +125,7 @@ public class DoorMinigame : MonoBehaviour
                 blocks.Remove(block.Key);
                 if (wonGame())
                 {
-                    CloseMinigame();
+                    UIManager.instance.DisableMiniGame();
                 }
    
             }

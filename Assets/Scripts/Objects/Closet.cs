@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Breaker : AbstractObject
+public class Closet : MonoBehaviour
 {
-    public GameObject minigame;
-
     private float interactRadius = 1.5f;
 
     public LayerMask layerMask;
-
-    public BreakerController breakerController;
     private void Update()
-    {   
+    {
         CheckIfPlayerInRange();
+        
+        
+      
     }
 
     private void CheckIfPlayerInRange()
@@ -22,8 +21,11 @@ public class Breaker : AbstractObject
 
         if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
-            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.lightMiniGame);
+            UIManager.instance.PlayerEnabled(false);
+            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.closetMiniGame);
         }
     }
-
+    
+    
+    
 }
