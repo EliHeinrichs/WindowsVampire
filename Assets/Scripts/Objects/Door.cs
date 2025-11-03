@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Door : AbstractObject
 {
-    public GameObject minigame;
-
     private float interactRadius = 1.5f;
 
     public LayerMask layerMask;
@@ -24,7 +22,7 @@ public class Door : AbstractObject
 
         if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
-            minigame.SetActive(true);
+            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.doorMiniGame);
         }
     }
     

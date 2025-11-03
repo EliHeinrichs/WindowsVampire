@@ -16,13 +16,13 @@ public class DayNight : MonoBehaviour
     private timeOfDay dayOrNight;
     
     [SerializeField]
-    private List<GameObject> nightObjects;
+    private List<GameObject> nightObjects = new List<GameObject>();
     
     [SerializeField]
-    private List<GameObject> dayObjects;
+    private List<GameObject> dayObjects = new List<GameObject>();
     
     public Image darkness;
-    private Animator darknessAnimator;
+    public Animator darknessAnimator;
     
     private enum timeOfDay
     {
@@ -33,8 +33,9 @@ public class DayNight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dayOrNight = timeOfDay.Day;
+  
         darknessAnimator = darkness.GetComponent<Animator>();
+    
     }
 
     // Update is called once per frame
@@ -43,12 +44,15 @@ public class DayNight : MonoBehaviour
        
         if (dayOrNight == timeOfDay.Day && currentTimer >= dayDuration)
         {
+            
             NightTime();
             currentTimer = 0;
         }
         else if (dayOrNight == timeOfDay.Night && currentTimer >= nightDuration)
         {
+           
             DayTime();  
+  
             currentTimer = 0;
         }
         else
@@ -67,14 +71,15 @@ public class DayNight : MonoBehaviour
     {
         dayOrNight = timeOfDay.Night;
         darknessAnimator.SetTrigger("Night");
-        foreach (GameObject obj in nightObjects)
+        
+        foreach (GameObject nightObject in nightObjects)
         {
-            obj.SetActive(true);
+            nightObject.SetActive(true);
         }
 
-        foreach (GameObject obj in dayObjects)
+        foreach (GameObject dayObject in dayObjects)
         {
-            obj.SetActive(false);
+            dayObject.SetActive(false);
         }
     }
 
@@ -82,14 +87,14 @@ public class DayNight : MonoBehaviour
     {
              dayOrNight = timeOfDay.Day;
         darknessAnimator.SetTrigger("Day");
-        foreach (GameObject obj in nightObjects)
+        foreach (GameObject nightObject in nightObjects)
         {
-            obj.SetActive(false);
+            nightObject.SetActive(false);
         }
 
-        foreach (GameObject obj in dayObjects)
+        foreach (GameObject dayObject in dayObjects)
         {
-            obj.SetActive(true);
+            dayObject.SetActive(true);
         }
     }
 }

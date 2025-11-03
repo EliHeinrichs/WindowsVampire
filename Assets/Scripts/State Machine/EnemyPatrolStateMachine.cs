@@ -22,6 +22,9 @@ public class EnemyPatrolStateMachine : StateMachine<EnemyPatrolStateMachine.Enem
     [SerializeField]
     public LightSwitch[] lightSwitches;
 
+    [SerializeField] 
+    public GameObject enemyObject;
+
 
     private void Start()
     {
@@ -94,6 +97,7 @@ public class EnemyPatrolStateMachine : StateMachine<EnemyPatrolStateMachine.Enem
             if (GetDoorsOnSameSide(false).Length > 0 || GetWindowsOnSameSide(false).Length > 0)
             {
                 Debug.Log("Enemy Has Entered House");
+                enemyObject.SetActive(true);
                 returnValue = true;
             }
         }

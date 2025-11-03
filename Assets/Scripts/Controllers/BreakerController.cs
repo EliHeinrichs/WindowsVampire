@@ -6,7 +6,7 @@ public class BreakerController : MonoBehaviour
 {
     public Pawn wirePawn;   
     public WireController wireController;
-    public GameObject minigame;
+
     public TrailRenderer wireTrail;
     public WireExit[] WireExits;
     public PlayerController playerController;
@@ -27,12 +27,19 @@ public class BreakerController : MonoBehaviour
         {
             if (wireExits.reachedEnd)
             {
-                minigame.SetActive(false);
-                playerController.ToggleMovement(true);
+                 UIManager.instance.DisableMiniGame();
+            
             }               
         }
     }
 
+    void OnEnable()
+    {
+        StartGame();
+    }
+    
+    
+    
     public void StartGame()
     {
         playerController.ToggleMovement(false);
@@ -41,9 +48,7 @@ public class BreakerController : MonoBehaviour
             if (wireExits.reachedEnd)
                 wireExits.reachedEnd = false;
         }
-
-        if (!minigame.activeSelf)
-            minigame.SetActive(true);
+        
 
         if (wireController != null)
             wireController.Possess(wirePawn);
@@ -55,10 +60,10 @@ public class BreakerController : MonoBehaviour
 
     private void ListenForInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && minigame.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Space) )
         {
-            minigame.SetActive(false);
-            playerController.ToggleMovement(true);
+            UIManager.instance.DisableMiniGame();
+    
         }
     } 
 }
