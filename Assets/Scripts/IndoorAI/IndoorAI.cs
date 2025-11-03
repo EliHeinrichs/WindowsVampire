@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 public class IndoorAI : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class IndoorAI : MonoBehaviour
     private Vector2[] checkDirs = {Vector2.right, Vector2.up, Vector2.down, Vector2.left};
     
     public float chaseDistance;
+
+    private float nextIndexTimer = 5f;
 
 
 
@@ -110,14 +114,58 @@ public class IndoorAI : MonoBehaviour
         }
     }
 
- 
+
+    Vector2 OnWallDirection()
+    {
+
+      
+        Vector2 bestDir = moveDirection;
+        float closestDistance = Mathf.Infinity;
+        foreach (Vector2 potentialDir in checkDirs)
+        {
+            if (Physics2D.CircleCast(rb.position, viewDistance/2, potentialDir, viewDistance ,hitLayer))
+            {
+                if (DEBUGMODE)
+                {
+                    Debug . DrawLine (rb. position , rb.position + potentialDir , Color . red);
+                }
+            }
+            else
+            {
+                
+                if (DEBUGMODE)
+                {
+                    Debug . DrawLine (rb. position , rb.position + potentialDir , Color . green);
+                }
+                if(Vector2.Distance(rb.position, potentialDir) > closestDistance)
+                {
+                    bestDir = potentialDir;
+                    closestDistance = Vector2.Distance(rb.position, potentialDir);
+                
+                }
+            }
+            
+        }
+        
+        return bestDir;
+       // Vector2 slideDir = Vector2.Perpendicular(wall.normal).normalized;
+        //return Vector2 . Dot (slideDir , moveDirection) > 0 ? slideDir : -slideDir;
+        
+        
+    }
 
 
     void UpdateWandering()
     {
         
             // if nothing is hit, then move towards the currentclick
-        
+        nextIndexTimer -= Time.deltaTime;
+
+        if (nextIndexTimer <= 0)
+        {
+            nextIndexTimer = 5f;
+            UpdateCurrentCheckPoint();
+        }
             
             RaycastHit2D hitPlayer = Physics2D.CircleCast(rb.position, chaseDistance, moveDirection ,0f,playerLayer);
             if (hitPlayer)
@@ -138,21 +186,16 @@ public class IndoorAI : MonoBehaviour
 
         distToPoint = Vector2.Distance(rb.position, checkPoints[currentCheckPointIndex].position);
         // sphere casts to see if any obstacles are hit
-        RaycastHit2D hit = Physics2D.CircleCast(rb.position, viewDistance, moveDirection ,1f,hitLayer);
+        RaycastHit2D hit = Physics2D.CircleCast(rb.position, viewDistance,moveDirection,0f,hitLayer);
+        
         
        RaycastHit2D hitObjective = Physics2D.Raycast(rb.position, (checkPoints[currentCheckPointIndex].position- rb.transform.position).normalized,distToPoint ,hitLayer);
         
         // if hit, then we update the move direction to follow  a slide direction, which gets the hit point and normalizes the perendicular direction, then using a dot product it evaluates if the slide direction or the inverse are in closer trajectory to the move direction
-        if (hit&& hitObjective)
+        if (hit && hitObjective )
         {
-          
-            
-        
-           
-           
-            Vector2 slideDir = Vector2.Perpendicular(hit.normal).normalized;
-            moveDirection = Vector2 . Dot (slideDir , moveDirection) > 0 ? slideDir : -slideDir;
-         
+
+           moveDirection = OnWallDirection();
 
         }
         else
@@ -165,7 +208,7 @@ public class IndoorAI : MonoBehaviour
 
       
 
-        if (distToPoint < 0.1)
+        if (distToPoint < 1)
         {
             UpdateCurrentCheckPoint();
         }
