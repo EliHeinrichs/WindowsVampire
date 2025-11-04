@@ -47,6 +47,7 @@ public class DoorMinigame : MonoBehaviour
         }
         else
         {
+            
             foreach (Image img in waitingToDieImages)
             {
                 Destroy(img.gameObject);
@@ -61,7 +62,7 @@ public class DoorMinigame : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        
+        GetComponent<Animator>().SetTrigger("In");
         StartGame();
     }
 
@@ -127,6 +128,16 @@ public class DoorMinigame : MonoBehaviour
         //controller.transform . rotation = Quaternion . AngleAxis (angle - 90 , Vector3 . forward);
     } 
     
+    IEnumerator WaitForAnimationEnd(Animator animator,string triggerName,string animationName)
+    {
+        animator.SetTrigger(triggerName);
+        
+
+        yield return new WaitForSeconds(1f);
+        UIManager.instance.DisableMiniGame();
+        // Code to execute after animation finishes
+    }
+    
     void HitBlock()
     {
         foreach (KeyValuePair<float,Image> block in blocks)
@@ -144,12 +155,13 @@ public class DoorMinigame : MonoBehaviour
                 blocks.Remove(block.Key);   
                 if (wonGame())
                 {
-                    UIManager.instance.DisableMiniGame();
+                    StartCoroutine((WaitForAnimationEnd(GetComponent<Animator>(), "Out", "DoorFadeOut")));
+                    
                     
                 }
                 else
                 { 
-             
+                   
                     block.Value.GetComponent<Image>().sprite = hitImage;
                     
                    
