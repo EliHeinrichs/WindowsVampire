@@ -49,7 +49,14 @@ public class UIManager : MonoBehaviour
 
     public void DisableMiniGame()
     {
+        
         currentActiveMiniGame.SetActive(false);
+        playerController.ToggleMovement(true);
+    }
+
+    public void EnablePlayer()
+    {
+        playerController.gameObject.SetActive(true);
         playerController.ToggleMovement(true);
     }
 
