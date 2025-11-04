@@ -22,7 +22,7 @@ public class Closet : MonoBehaviour
         if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
             UIManager.instance.PlayerEnabled(false);
-            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.closetMiniGame);
+            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.closetMiniGame, gameObject);
         }
     }
     

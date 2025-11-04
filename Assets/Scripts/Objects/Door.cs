@@ -22,7 +22,7 @@ public class Door : AbstractObject
 
         if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
-            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.doorMiniGame);
+            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.doorMiniGame, gameObject);
         }
     }
     

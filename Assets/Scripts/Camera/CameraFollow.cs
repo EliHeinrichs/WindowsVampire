@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     private Vector2 minBounds;
 
-    private Camera camera;
+    private new Camera camera;
     private float camWidth;
     private float camHeight;
 

@@ -22,7 +22,7 @@ public class Breaker : AbstractObject
 
         if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
-            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.lightMiniGame);
+            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.lightMiniGame, gameObject);
         }
     }
 
