@@ -22,7 +22,7 @@ public class Window : AbstractObject
 
         if (collider != null && Input.GetKeyDown(KeyCode.E))
         {           
-            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.windowMiniGame);
+            UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.windowMiniGame, gameObject);
         }
     }
     

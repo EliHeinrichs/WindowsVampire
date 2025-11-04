@@ -26,13 +26,25 @@ public class UIManager : MonoBehaviour
     public GameObject windowMiniGame;
     public GameObject closetMiniGame;
 
-    public void UpdateCurrentActiveMiniGame(GameObject nextMiniGame)
+    public void UpdateCurrentActiveMiniGame(GameObject nextMiniGame, GameObject attachedObject)
     {
         
         currentActiveMiniGame = nextMiniGame;
         currentActiveMiniGame.SetActive(true);
         playerController.ToggleMovement(false);
-        
+
+        if(attachedObject.TryGetComponent<Window>(out Window attachedWindow))
+        {
+            currentActiveMiniGame.TryGetComponent<WindowMinigame>(out WindowMinigame currentMinigame);
+            currentMinigame.attachedWindow = attachedWindow;          
+        }
+
+        if(attachedObject.TryGetComponent<Door>(out Door attachedDoor))
+        {
+            currentActiveMiniGame.TryGetComponent<DoorMinigame>(out DoorMinigame currentMinigame);
+            currentMinigame.attachedDoor = attachedDoor;
+        }
+
     }
 
     public void DisableMiniGame()
