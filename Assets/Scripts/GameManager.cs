@@ -1,0 +1,66 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    
+    public static GameManager instance;
+    
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    public List<Transform> pingObjects = new List<Transform>();
+
+    public GameObject pingPrefab;
+    [SerializeField]
+    private float pingAngle;
+    [SerializeField]
+    private float pingTime;
+    
+    private List<Vector2> pingList = new List<Vector2>();
+    
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+            
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void HandlePings()
+    {
+        foreach (Vector2 point in pingList)
+        {
+            GameObject ping = Instantiate(pingPrefab, pingPrefab.transform.position,  Quaternion.identity);
+            
+           // ping.transform.eulerAngles = new Vector3(0 , 0 , point ) ;
+            
+        }
+    }
+
+    public void PingPopup(AbstractObject objectToPing)
+    {
+      //  pingAngle = Vector2.Angle(objectToPing.transform.position, pingObject.transform.position);
+        
+        
+        Debug.Log(pingAngle + ": angle");
+        
+    }
+}

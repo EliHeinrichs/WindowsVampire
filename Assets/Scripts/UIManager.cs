@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public GameObject windowMiniGame;
     public GameObject closetMiniGame;
 
+
     public void UpdateCurrentActiveMiniGame(GameObject nextMiniGame, GameObject attachedObject)
     {
         
@@ -64,6 +65,8 @@ public class UIManager : MonoBehaviour
     {
         playerController.gameObject.SetActive(status);
     }
+
+   
     
     
     
