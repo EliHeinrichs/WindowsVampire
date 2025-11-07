@@ -131,21 +131,16 @@ public class EnemyPatrolStateMachine : StateMachine<EnemyPatrolStateMachine.Enem
     }
     private void UnlockDoor(Door doorToOpen)
     {
-   
-     
         doorToOpen.ToggleActive();
     }
 
     private void OpenWindow(Window windowToOpen)
     {
-    
-       
         windowToOpen.ToggleActive();
     }
 
     private void TurnOffLight(LightSwitch lightSwitchToFlick)
     {
-        
         lightSwitchToFlick.ToggleActive();
     }
 
