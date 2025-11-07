@@ -24,6 +24,9 @@ public class DayNight : MonoBehaviour
     public Image darkness;
     public Animator darknessAnimator;
     
+    public GameObject enemyIndoors;
+    
+
     private enum timeOfDay
     {
         Day,
@@ -70,6 +73,7 @@ public class DayNight : MonoBehaviour
     void NightTime()
     {
         dayOrNight = timeOfDay.Night;
+   
         darknessAnimator.SetTrigger("Night");
         
         foreach (GameObject nightObject in nightObjects)
@@ -81,11 +85,14 @@ public class DayNight : MonoBehaviour
         {
             dayObject.SetActive(false);
         }
+        enemyIndoors.SetActive(false);
+       
     }
 
     void DayTime()
     {
              dayOrNight = timeOfDay.Day;
+        
         darknessAnimator.SetTrigger("Day");
         foreach (GameObject nightObject in nightObjects)
         {
@@ -96,5 +103,6 @@ public class DayNight : MonoBehaviour
         {
             dayObject.SetActive(true);
         }
+        enemyIndoors.SetActive(false);
     }
 }
