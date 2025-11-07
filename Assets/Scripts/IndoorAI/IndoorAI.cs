@@ -40,6 +40,9 @@ public class IndoorAI : MonoBehaviour
     [Header("Chase Vars")]
     public Transform playerTransform;
     public float chaseDistance;
+    public float hitRange;
+    public float returnToWanderTime;
+    public float currentWaitTime;
     
     
     private Vector2[] checkDirs = {Vector2.right, Vector2.up, Vector2.down, Vector2.left };
@@ -56,15 +59,7 @@ public class IndoorAI : MonoBehaviour
 
 
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            UIManager.instance.JumpScarePlayer();
-            Debug.Log("Dead");
-        }
-    }
-
+    
     
       
     // Start is called before the first frame update
@@ -82,6 +77,8 @@ public class IndoorAI : MonoBehaviour
         
         
     }
+
+  
 
    
     Transform UpdateCurrentCheckPoint()
@@ -197,6 +194,7 @@ public class IndoorAI : MonoBehaviour
         RaycastHit2D hitPlayer = Physics2D.CircleCast(rb.position, chaseDistance, moveDirection ,0f,playerLayer);
         if (hitPlayer)
         {
+            currentWaitTime = returnToWanderTime;
             SwitchStates(states.Chasing);
         }
             
@@ -243,14 +241,22 @@ public class IndoorAI : MonoBehaviour
          
        
     }
-    
+    void CheckForHItPlayer()
+    {
+        RaycastHit2D hitPlayer = Physics2D.CircleCast(rb.position,hitRange,moveDirection,0f,playerLayer);
+        RaycastHit2D hitWall = Physics2D.Raycast(rb.position, moveDirection , hitRange, hitLayer);
+        if (hitPlayer && !hitWall )
+        {
+            UIManager.instance.JumpScarePlayer();
+        }
+    }
 
     void UpdateChasing()
     {
-  
+        currentWaitTime -= Time.deltaTime;
         
         RunCheckPointTimer();
-        
+        CheckForHItPlayer();    
         if (DEBUGMODE)
         {
             Debug . DrawLine (rb. position , checkPoints[currentCheckPointIndex].position , Color . black);
@@ -258,9 +264,10 @@ public class IndoorAI : MonoBehaviour
         }
         
         
-        distToPoint = Vector2.Distance(rb.position, playerTransform.position);
+        distToPoint = Vector2.Distance(rb.position, checkPoints[currentCheckPointIndex].position);
+
         RaycastHit2D hit = Physics2D.CircleCast(rb.position, viewDistance,moveDirection,0f,hitLayer);
-        RaycastHit2D hitObjective = Physics2D.Raycast(rb.position, (checkPoints[currentCheckPointIndex].position- rb.transform.position).normalized,distToPoint ,hitLayer);
+        RaycastHit2D hitObjective = Physics2D.Raycast(rb.position, (playerTransform.position- rb.transform.position).normalized, distToPoint ,hitLayer);
         
        
         if (hit && hitObjective )
@@ -269,9 +276,8 @@ public class IndoorAI : MonoBehaviour
         }
         else
         {
-            moveDirection = ( playerTransform.position- rb.transform.position).normalized;
+            moveDirection = (playerTransform.position- rb.transform.position).normalized;
         }
-        
         
         Vector2 moveForce = moveDirection * speed;
 
@@ -283,7 +289,7 @@ public class IndoorAI : MonoBehaviour
         }
 
         
-        if (distToPoint >= chaseDistance )
+        if (distToPoint >= chaseDistance && currentWaitTime <= 0)
         {
             SwitchStates(states.Wandering);
         }
