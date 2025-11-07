@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6796363273998082194}
   - component: {fileID: 5194406257576336738}
   - component: {fileID: 5831562793229016030}
+  - component: {fileID: 7043542956019434587}
   - component: {fileID: 6625182983104753255}
   - component: {fileID: 1547933658824209700}
   m_Layer: 8
@@ -150,6 +151,34 @@ MonoBehaviour:
     m_Bits: 64
   hitbox: {fileID: 6625182983104753255}
   defaultPosition: {x: 0, y: 0}
+--- !u!114 &7043542956019434587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390030146966657259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf119062167a8b48afd95a482e21023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 6796363273998082194}
+  targets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cam: {fileID: 0}
+  arrowPrefab: {fileID: 8973090209283719828, guid: 916f83b29823d2b47b0d4fb90b2cbef4, type: 3}
+  edgePadding: 200
 --- !u!61 &6625182983104753255
 BoxCollider2D:
   m_ObjectHideFlags: 0
