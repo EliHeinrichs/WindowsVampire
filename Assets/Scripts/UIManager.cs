@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
     public GameObject windowMiniGame;
     public GameObject closetMiniGame;
 
+    public GameObject jumpScare;
+
+
     public void UpdateCurrentActiveMiniGame(GameObject nextMiniGame, GameObject attachedObject)
     {
         
@@ -49,13 +52,25 @@ public class UIManager : MonoBehaviour
 
     public void DisableMiniGame()
     {
+        
         currentActiveMiniGame.SetActive(false);
+        playerController.ToggleMovement(true);
+    }
+
+    public void EnablePlayer()
+    {
+        playerController.gameObject.SetActive(true);
         playerController.ToggleMovement(true);
     }
 
     public void PlayerEnabled(bool status)
     {
         playerController.gameObject.SetActive(status);
+    }
+
+    public void JumpScarePlayer()
+    {
+        jumpScare.SetActive(true);
     }
     
     

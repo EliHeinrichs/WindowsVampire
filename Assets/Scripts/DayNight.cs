@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,11 @@ public class DayNight : MonoBehaviour
     
     public Image darkness;
     public Animator darknessAnimator;
+    [SerializeField]
+    private int nightCount;
+    
+    [SerializeField]
+    private TextMeshProUGUI nightText;
     
     private enum timeOfDay
     {
@@ -35,6 +41,7 @@ public class DayNight : MonoBehaviour
     {
   
         darknessAnimator = darkness.GetComponent<Animator>();
+        nightCount = 0;
     
     }
 
@@ -46,11 +53,14 @@ public class DayNight : MonoBehaviour
         {
             
             NightTime();
+            nightCount++;
+            nightText.text = "night: " + nightCount.ToString();
             currentTimer = 0;
         }
         else if (dayOrNight == timeOfDay.Night && currentTimer >= nightDuration)
         {
            
+            nightText.text = "night over";
             DayTime();  
   
             currentTimer = 0;

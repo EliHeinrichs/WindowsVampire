@@ -30,7 +30,13 @@ public class DoorMinigame : MonoBehaviour
     private bool reverseSpin = false;
 
     public Door attachedDoor;
+
+    public Sprite hitImage;
     
+    private List<Image> waitingToDieImages = new List<Image>();
+
+    public LockVisual[] locks;
+    private int currentLock = 0;
 
   
     public bool wonGame()
@@ -41,6 +47,12 @@ public class DoorMinigame : MonoBehaviour
         }
         else
         {
+            
+            foreach (Image img in waitingToDieImages)
+            {
+                Destroy(img.gameObject);
+            }
+
             attachedDoor.active = true;
             return true;
         }            
@@ -50,7 +62,7 @@ public class DoorMinigame : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        
+        GetComponent<Animator>().SetTrigger("In");
         StartGame();
     }
 
@@ -64,6 +76,7 @@ public class DoorMinigame : MonoBehaviour
     void GenerateAngles()
     {
         blocks.Clear();
+        waitingToDieImages.Clear();
         for (int i = 0; i <= totalBlocks; i++)
         {
             float angle = Random.Range(0, 360);
@@ -71,8 +84,8 @@ public class DoorMinigame : MonoBehaviour
             slot.name = "slot" + i;
             blocks.Add(angle, slot);
             Debug.Log(blocks.Keys);
-            slot.rectTransform.anchoredPosition = startRectTransform.anchoredPosition;
-            slot.rectTransform.sizeDelta = new Vector2(blockSizeRange * 2, blockHeight);
+            //slot.rectTransform.anchoredPosition = startRectTransform.anchoredPosition;
+            slot.rectTransform.sizeDelta += new Vector2(blockSizeRange * 2, 0f);
             slot.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
 
             slot.gameObject.SetActive(true);
@@ -115,19 +128,47 @@ public class DoorMinigame : MonoBehaviour
         //controller.transform . rotation = Quaternion . AngleAxis (angle - 90 , Vector3 . forward);
     } 
     
+    IEnumerator WaitForAnimationEnd(Animator animator,string triggerName,string animationName)
+    {
+        animator.SetTrigger(triggerName);
+        
+
+        yield return new WaitForSeconds(1f);
+        UIManager.instance.DisableMiniGame();
+        // Code to execute after animation finishes
+    }
+    
     void HitBlock()
     {
         foreach (KeyValuePair<float,Image> block in blocks)
         {
             if (currentAngle < (block.Key + blockSizeRange) && currentAngle > (block.Key - blockSizeRange))
             {
-                Destroy(block.Value.gameObject);    
-                blocks.Remove(block.Key);
+                
+                locks[currentLock].ToggleLockState();
+                currentLock++;
+                if (currentLock >= locks.Length)
+                {
+                    currentLock = 0;
+                }
+                waitingToDieImages.Add(block.Value);
+                blocks.Remove(block.Key);   
                 if (wonGame())
                 {
-                    UIManager.instance.DisableMiniGame();
+                    StartCoroutine((WaitForAnimationEnd(GetComponent<Animator>(), "Out", "DoorFadeOut")));
+                    
+                    
                 }
-   
+                else
+                { 
+                   
+                    block.Value.GetComponent<Image>().sprite = hitImage;
+                    
+                   
+                
+                }
+                             
+
             }
             else
             {
