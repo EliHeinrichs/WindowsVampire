@@ -60,6 +60,7 @@ public class IndoorAI : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            UIManager.instance.JumpScarePlayer();
             Debug.Log("Dead");
         }
     }

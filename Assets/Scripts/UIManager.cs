@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     public GameObject windowMiniGame;
     public GameObject closetMiniGame;
 
+    public GameObject jumpScare;
+
 
     public void UpdateCurrentActiveMiniGame(GameObject nextMiniGame, GameObject attachedObject)
     {
@@ -66,7 +68,10 @@ public class UIManager : MonoBehaviour
         playerController.gameObject.SetActive(status);
     }
 
-   
+    public void JumpScarePlayer()
+    {
+        jumpScare.SetActive(true);
+    }
     
     
     

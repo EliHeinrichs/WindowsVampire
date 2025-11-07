@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
    
 
     public GameObject pingObject;
-    [SerializeField]
-    private float pingAngle;
+    
     [SerializeField]
     private float pingTime;
+    
     
  
     
@@ -46,21 +46,7 @@ public class GameManager : MonoBehaviour
 
     
     
+
+
     
-
-    public void PingPopup(AbstractObject objectToPing)
-    {
-      //  pingAngle = Vector2.Angle(objectToPing.transform.position, pingObject.transform.position);
-        
-        
-        Debug.Log(pingAngle + ": angle");
-        
-    }
-
-    IEnumerator PingFollow(Transform target)
-    {
-        
-        
-        yield return new WaitForSeconds(pingTime);
-    }
 }
