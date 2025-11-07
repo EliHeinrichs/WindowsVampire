@@ -43,6 +43,10 @@ public class IndoorAI : MonoBehaviour
     public float hitRange;
     public float returnToWanderTime;
     public float currentWaitTime;
+
+    public float speedMult = 1.1f;
+    public float speedTime = 0.5f;
+    public float currentSpeedTime = 0f;
     
     
     private Vector2[] checkDirs = {Vector2.right, Vector2.up, Vector2.down, Vector2.left };
@@ -255,6 +259,18 @@ public class IndoorAI : MonoBehaviour
     {
         currentWaitTime -= Time.deltaTime;
         
+        
+        currentSpeedTime -= Time.deltaTime;
+
+        if (currentSpeedTime <= 0)
+        {
+            speed *= speedMult;
+            currentSpeedTime = speedTime;
+            
+        }
+        
+        
+        
         RunCheckPointTimer();
         CheckForHItPlayer();    
         if (DEBUGMODE)
@@ -272,6 +288,7 @@ public class IndoorAI : MonoBehaviour
        
         if (hit && hitObjective )
         {
+            speed = 1;
             OnWallDirection();
         }
         else

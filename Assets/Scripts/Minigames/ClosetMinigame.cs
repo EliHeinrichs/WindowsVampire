@@ -25,24 +25,34 @@ public class ClosetMinigame : MonoBehaviour
     [SerializeField]
     private float degenRate;
     
-    
-    private float currentLosingBuffer;
 
+    private float currentLosingBuffer;
+    [SerializeField]
     public inputs currentRequiredInput;
+    
     
     private float barScaleMultiplier = 100;
     
-    
+    [SerializeField]
     public inputs playerInput;
 
-
-    public Image rightKey;
-    public Image leftKey;
-
-    public Sprite downSprite;
-    public Sprite upSprite;
+    [SerializeField]
+    public key rightKey;
+    [SerializeField]
+    public key leftKey;
+   
 
    
+    [System.Serializable]
+    public struct key
+    {
+        [SerializeField]
+        public Image image;
+        [SerializeField]
+        public Sprite upSprite;
+        [SerializeField]
+        public Sprite downSprite;
+    }
     
     
     public enum inputs
@@ -54,9 +64,17 @@ public class ClosetMinigame : MonoBehaviour
     
     
 
-    void UpdateSprite(Image host, Sprite upOrDown)
+    void UpdateSprite(key currentKey, bool upStatus)
     {
-        host.sprite = upOrDown;
+        if (upStatus != true)
+        {
+            currentKey.image.sprite = currentKey.downSprite;
+        }
+        else
+        {
+            currentKey.image.sprite = currentKey.upSprite;
+        }
+        
     }
     
     
@@ -156,17 +174,16 @@ public class ClosetMinigame : MonoBehaviour
         switch (currentRequiredInput)
         {
             case inputs.none:
-                UpdateSprite(rightKey, upSprite);
-                UpdateSprite(leftKey, upSprite);
-                
+                UpdateSprite(leftKey,false);
+                UpdateSprite(rightKey,false);
                 break;
             case inputs.left:
-                UpdateSprite(rightKey, upSprite);
-                UpdateSprite(leftKey, downSprite);
+                UpdateSprite(leftKey, true);
+                UpdateSprite(rightKey,false);  
                 break;
             case inputs.right:
-                UpdateSprite(rightKey, downSprite);
-                UpdateSprite(leftKey, upSprite);
+                UpdateSprite(leftKey,false);
+                UpdateSprite(rightKey,true);
                 break;
         }
     }
