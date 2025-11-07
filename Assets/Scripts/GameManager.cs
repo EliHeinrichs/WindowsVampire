@@ -21,15 +21,15 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public List<Transform> pingObjects = new List<Transform>();
+   
 
-    public GameObject pingPrefab;
+    public GameObject pingObject;
     [SerializeField]
     private float pingAngle;
     [SerializeField]
     private float pingTime;
     
-    private List<Vector2> pingList = new List<Vector2>();
+ 
     
     
     // Start is called before the first frame update
@@ -44,16 +44,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void HandlePings()
-    {
-        foreach (Vector2 point in pingList)
-        {
-            GameObject ping = Instantiate(pingPrefab, pingPrefab.transform.position,  Quaternion.identity);
-            
-           // ping.transform.eulerAngles = new Vector3(0 , 0 , point ) ;
-            
-        }
-    }
+    
+    
+    
 
     public void PingPopup(AbstractObject objectToPing)
     {
@@ -62,5 +55,12 @@ public class GameManager : MonoBehaviour
         
         Debug.Log(pingAngle + ": angle");
         
+    }
+
+    IEnumerator PingFollow(Transform target)
+    {
+        
+        
+        yield return new WaitForSeconds(pingTime);
     }
 }
