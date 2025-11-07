@@ -24,10 +24,8 @@ public class EnemyPatrolStateMachine : StateMachine<EnemyPatrolStateMachine.Enem
 
     [SerializeField] 
     public GameObject enemyObject;
-    
 
-     private bool enemyEntered;
-    
+
     private void Start()
     {
         Initialize(EnemyState.North);
@@ -96,39 +94,14 @@ public class EnemyPatrolStateMachine : StateMachine<EnemyPatrolStateMachine.Enem
         bool returnValue = false;
         if(GetLightSwitchesOnSameSide(true).Length == 0)
         {
-            if (GetDoorsOnSameSide(false).Length > 0 )
+            if (GetDoorsOnSameSide(false).Length > 0 || GetWindowsOnSameSide(false).Length > 0)
             {
-                
-                
-                if (!enemyEntered)
-                {
-                    EnemyEnter(GetDoorsOnSameSide(false)[0]);
-                }
-                returnValue = true;
-                
-            }
-
-            if (GetWindowsOnSameSide(false).Length > 0)
-            {
-                  
-                if (!enemyEntered)
-                {
-                    EnemyEnter(GetWindowsOnSameSide(false)[0]);
-                }
+                Debug.Log("Enemy Has Entered House");
+                enemyObject.SetActive(true);
                 returnValue = true;
             }
         }
         return returnValue;
-    }
-
-
-    private void EnemyEnter(AbstractObject recentObject)
-    {
-        enemyEntered = true;
-        Debug.Log("Enemy Has Entered House");
-        enemyObject.transform.position = recentObject.transform.position + (Vector3.zero - recentObject.transform.position ).normalized;
-        enemyObject.SetActive(true);
-        
     }
 
     private void ChooseRandomAction()
@@ -158,21 +131,16 @@ public class EnemyPatrolStateMachine : StateMachine<EnemyPatrolStateMachine.Enem
     }
     private void UnlockDoor(Door doorToOpen)
     {
-   
-        
         doorToOpen.ToggleActive();
     }
 
     private void OpenWindow(Window windowToOpen)
     {
-    
-      
         windowToOpen.ToggleActive();
     }
 
     private void TurnOffLight(LightSwitch lightSwitchToFlick)
     {
-     
         lightSwitchToFlick.ToggleActive();
     }
 
