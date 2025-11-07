@@ -2047,17 +2047,7 @@ MonoBehaviour:
   darkness: {fileID: 1859949292}
   darknessAnimator: {fileID: 1859949294}
   nightCount: 0
-<<<<<<< Updated upstream
-  nightText: {fileID: 0}
-=======
   nightText: {fileID: 1730880697}
->>>>>>> Stashed changes
-=======
-  nightText: {fileID: 1730880697}
->>>>>>> Stashed changes
-=======
-  nightText: {fileID: 1730880697}
->>>>>>> Stashed changes
 --- !u!4 &1232475968
 Transform:
   m_ObjectHideFlags: 0
