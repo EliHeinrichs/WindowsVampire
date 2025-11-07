@@ -2052,6 +2052,9 @@ MonoBehaviour:
 =======
   nightText: {fileID: 1730880697}
 >>>>>>> Stashed changes
+=======
+  nightText: {fileID: 1730880697}
+>>>>>>> Stashed changes
 --- !u!4 &1232475968
 Transform:
   m_ObjectHideFlags: 0
