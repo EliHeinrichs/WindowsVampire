@@ -1981,8 +1981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12af54f8eb6f55445a94bd2ac6b3d7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pingObject: {fileID: 0}
-  pingTime: 5
+
 --- !u!4 &1101754023
 Transform:
   m_ObjectHideFlags: 0
@@ -2036,8 +2035,6 @@ MonoBehaviour:
   dayObjects: []
   darkness: {fileID: 1859949292}
   darknessAnimator: {fileID: 1859949294}
-  nightCount: 0
-  nightText: {fileID: 1730880697}
 --- !u!4 &1232475968
 Transform:
   m_ObjectHideFlags: 0
@@ -2806,7 +2803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4745376437591651895, guid: 8f9313d4a11b75946aff03b1fdf9bc40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.516
       objectReference: {fileID: 0}
     - target: {fileID: 4759059069493250577, guid: 8f9313d4a11b75946aff03b1fdf9bc40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4458,6 +4455,34 @@ PrefabInstance:
     - target: {fileID: 1390030146966657259, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063371048984816729, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.85379994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063371048984816729, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063371048984816729, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 112f96e8ad37c2246b273d8ae59763b9, type: 3}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
