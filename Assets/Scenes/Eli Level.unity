@@ -1123,6 +1123,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3161543366744164450, guid: 072387a66e4152045912d332531bd80f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.99028903
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161543366744164450, guid: 072387a66e4152045912d332531bd80f, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.004855484
+      objectReference: {fileID: 0}
     - target: {fileID: 5964584818918648740, guid: 072387a66e4152045912d332531bd80f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.41493407
@@ -2605,7 +2613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1379131332
 Transform:
   m_ObjectHideFlags: 0
@@ -4714,11 +4722,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063371048984816729, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.078
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2063371048984816729, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_Sprite
@@ -4735,6 +4743,22 @@ PrefabInstance:
     - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Size.x
+      value: 0.59970975
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Size.y
+      value: 0.74063706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0020674467
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.027199388
       objectReference: {fileID: 0}
     - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
