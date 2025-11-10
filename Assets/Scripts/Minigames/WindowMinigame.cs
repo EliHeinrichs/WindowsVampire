@@ -33,7 +33,7 @@ public class WindowMinigame : MonoBehaviour
     float elapsed = 0f;
     private void OnEnable()
     {
-  
+        playerController.ToggleMovement(false);
         currentTime = maxTime;
         currentPresses = 0;
         neededPresses = Random.Range(minRandomPresses, maxRandomPresses);
@@ -56,7 +56,7 @@ public class WindowMinigame : MonoBehaviour
         if (currentTime <= 0)
         {
             Debug.Log("You lose");
-           StartCoroutine(WaitForAnimationEnd(GetComponent<Animator>(), "Out", "WindowFadeOut")); 
+            ClosePanel();
 
         }   
 
@@ -64,18 +64,12 @@ public class WindowMinigame : MonoBehaviour
             CloseTimer();
 
     }
- 
-    
-    IEnumerator WaitForAnimationEnd(Animator animator,string triggerName,string animationName)
+    void ClosePanel()
     {
-        animator.SetTrigger(triggerName);
-        
-
-        yield return new WaitForSeconds(1.5f);
-        
-        UIManager.instance.DisableMiniGame();
-        // Code to execute after animation finishes
+        playerController.ToggleMovement(true);
+        gameObject.SetActive(false);
     }
+
 
     void PressedEvent()
     {
@@ -95,10 +89,9 @@ public class WindowMinigame : MonoBehaviour
         if (currentPresses >= maxRandomPresses)
         {   
             Debug.Log("You Win");
-            CloseWindow();
-            StartCoroutine(WaitForAnimationEnd(GetComponent<Animator>(), "Out", "WindowFadeOut")); 
+
             attachedWindow.active = true;
-            
+            CloseWindow();
         }
             
     }
@@ -133,7 +126,7 @@ public class WindowMinigame : MonoBehaviour
         if (elapsed >= closeDuration)
         {
             isClosing = false;
-                 
+            ClosePanel();         
             return;
         }
 

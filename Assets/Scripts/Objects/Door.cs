@@ -20,7 +20,7 @@ public class Door : AbstractObject
     {
         Collider2D collider = Physics2D.OverlapCircle(transform.position, interactRadius, layerMask);
 
-        if (collider != null && Input.GetKeyDown(KeyCode.E) && !active)
+        if (collider != null && Input.GetKeyDown(KeyCode.E))
         {
             UIManager.instance.UpdateCurrentActiveMiniGame(UIManager.instance.doorMiniGame, gameObject);
         }
