@@ -47,6 +47,8 @@ public class IndoorAI : MonoBehaviour
     public float speedMult = 1.1f;
     public float speedTime = 0.5f;
     public float currentSpeedTime = 0f;
+
+    public float maxSpeed;
     
     
     private Vector2[] checkDirs = {Vector2.right, Vector2.up, Vector2.down, Vector2.left };
@@ -78,8 +80,16 @@ public class IndoorAI : MonoBehaviour
     {
       
         HandleCurrentState();
+
+        if (speed >= maxSpeed)
+        {
+            speed = maxSpeed;
+        }
         
-        
+        if(speed <= 1)
+        {
+            speed = 1;
+        }
     }
 
   
@@ -149,6 +159,11 @@ public class IndoorAI : MonoBehaviour
                 
                 }
             }
+            
+        }
+
+        if (bestDir == null)
+        {
             
         }
         moveDirection = bestDir;
@@ -288,7 +303,7 @@ public class IndoorAI : MonoBehaviour
        
         if (hit && hitObjective )
         {
-            speed = 1;
+            speed /= speedMult;
             OnWallDirection();
         }
         else

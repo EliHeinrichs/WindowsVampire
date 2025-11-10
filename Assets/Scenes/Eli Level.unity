@@ -2367,8 +2367,11 @@ MonoBehaviour:
   slotImage: {fileID: 1691850752}
   startRectTransform: {fileID: 676761953}
   attachedDoor: {fileID: 1624217432}
-  hitImage: {fileID: 0}
-  locks: []
+  hitImage: {fileID: -759339347, guid: 8d43c3f2080892c45a398f10ca225ea4, type: 3}
+  locks:
+  - {fileID: 1591764103}
+  - {fileID: 1936110609}
+  - {fileID: 1287449146}
 --- !u!95 &1263643388
 Animator:
   serializedVersion: 5
@@ -2722,7 +2725,7 @@ MonoBehaviour:
   lightMiniGame: {fileID: 1691605239}
   windowMiniGame: {fileID: 674219306}
   closetMiniGame: {fileID: 1940572875}
-  jumpScare: {fileID: 0}
+  jumpScare: {fileID: 1757539945}
 --- !u!1001 &1433440023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4407,22 +4410,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a704e4c5545212479501fc1efe50de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTimer: 2
-  indexFloatRange: 0.7
-  baseTimer: 1
-  statusBar: {fileID: 1322812362}
-  maxHealth: 10
-  degenRate: 1
+  currentTimer: 0
+  indexFloatRange: 0
+  baseTimer: 0
+  statusBar: {fileID: 0}
+  maxHealth: 400
+  degenRate: 0
   currentRequiredInput: 0
   playerInput: 0
   rightKey:
-    image: {fileID: 618865842}
-    upSprite: {fileID: 21300000, guid: cb501758a3d4e3b46872bcadd8755a70, type: 3}
-    downSprite: {fileID: 21300000, guid: a5137048234faf6479f3ce0f801fb975, type: 3}
+    image: {fileID: 0}
+    upSprite: {fileID: 0}
+    downSprite: {fileID: 0}
   leftKey:
-    image: {fileID: 1570449600}
-    upSprite: {fileID: 21300000, guid: b6fee38c711dfb847b7d18862a8c25f3, type: 3}
-    downSprite: {fileID: 21300000, guid: 8a79a92197bfd2947b258937114869ad, type: 3}
+    image: {fileID: 0}
+    upSprite: {fileID: 0}
+    downSprite: {fileID: 0}
 --- !u!1 &1980849348
 GameObject:
   m_ObjectHideFlags: 0
@@ -4455,7 +4458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e197bf07930135c4999028903b9b0b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewDistance: 1
+  viewDistance: 0.6
   speed: 1
   hitLayer:
     serializedVersion: 2
@@ -4471,13 +4474,14 @@ MonoBehaviour:
   DEBUGMODE: 1
   currentState: 0
   playerTransform: {fileID: 3037067}
-  chaseDistance: 4
-  hitRange: 0
-  returnToWanderTime: 0
-  currentWaitTime: 0
+  chaseDistance: 6
+  hitRange: 0.5
+  returnToWanderTime: 5
+  currentWaitTime: 5
   speedMult: 1.1
   speedTime: 0.5
-  currentSpeedTime: 0
+  currentSpeedTime: 0.5
+  maxSpeed: 10
   idleRandomTime: 5
   idleRandomRange: 3
 --- !u!212 &1980849350
@@ -4541,8 +4545,8 @@ Transform:
   m_GameObject: {fileID: 1980849348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.02, y: 2.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.5546, y: 1.4255, z: 0}
+  m_LocalScale: {x: 0.5723, y: 0.5324, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
