@@ -174,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockImage: {fileID: 21300000, guid: 51b3abdedcc3e854c85b8d26e672ab02, type: 3}
   unlockImage: {fileID: 21300000, guid: a1d66fd7e922aff47bfbe8b56fc0e49e, type: 3}
+  lockComponent: {fileID: 0}
 --- !u!114 &50896735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,11 +705,6 @@ MonoBehaviour:
   slotImage: {fileID: 2092997197}
   startRectTransform: {fileID: 1907113378}
   attachedDoor: {fileID: 1739790938}
-  hitImage: {fileID: -759339347, guid: 8d43c3f2080892c45a398f10ca225ea4, type: 3}
-  locks:
-  - {fileID: 705644425}
-  - {fileID: 50896734}
-  - {fileID: 2070040763}
 --- !u!1 &381374431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,6 +1431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockImage: {fileID: 21300000, guid: 4abba3617ec07864bbdd3df4b74f4795, type: 3}
   unlockImage: {fileID: 21300000, guid: 23d80fd3fbf159d49b0c20b285c8056e, type: 3}
+  lockComponent: {fileID: 0}
 --- !u!114 &705644426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2572,14 +2569,6 @@ MonoBehaviour:
   currentState: 0
   playerTransform: {fileID: 1193465303}
   chaseDistance: 4
-  hitRange: 0.6
-  returnToWanderTime: 3
-  currentWaitTime: 0
-  speedMult: 1.2
-  speedTime: 0.5
-  currentSpeedTime: 0
-  idleRandomTime: 15
-  idleRandomRange: 8
 --- !u!212 &1146956474
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2626,10 +2615,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.5, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1146956475
@@ -2821,6 +2810,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 112f96e8ad37c2246b273d8ae59763b9, type: 3}
@@ -2835,6 +2832,10 @@ PrefabInstance:
     - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602136406498399093, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6625182983104753255, guid: 201d5157749fbc04e89232a97475fb87, type: 3}
       propertyPath: m_Size.x
@@ -3420,9 +3421,6 @@ MonoBehaviour:
   dayObjects: []
   darkness: {fileID: 262231413}
   darknessAnimator: {fileID: 262231412}
-  nightCount: 0
-  nightText: {fileID: 2000205263}
-  enemyIndoors: {fileID: 1146956470}
 --- !u!4 &1540986383
 Transform:
   m_ObjectHideFlags: 0
@@ -3981,22 +3979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a704e4c5545212479501fc1efe50de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTimer: 1
-  indexFloatRange: 0.4
-  baseTimer: 1
-  statusBar: {fileID: 1568803486}
-  maxHealth: 10
-  degenRate: 2
-  currentRequiredInput: 0
-  playerInput: 0
-  rightKey:
-    image: {fileID: 381374433}
-    upSprite: {fileID: 21300000, guid: a5137048234faf6479f3ce0f801fb975, type: 3}
-    downSprite: {fileID: 21300000, guid: cb501758a3d4e3b46872bcadd8755a70, type: 3}
-  leftKey:
-    image: {fileID: 614406217}
-    upSprite: {fileID: 21300000, guid: 8a79a92197bfd2947b258937114869ad, type: 3}
-    downSprite: {fileID: 21300000, guid: b6fee38c711dfb847b7d18862a8c25f3, type: 3}
+  distanceNeeded: 0
+  closetImage: {fileID: 0}
 --- !u!114 &1645377328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4187,7 +4171,6 @@ MonoBehaviour:
   lightMiniGame: {fileID: 1572435196}
   windowMiniGame: {fileID: 1751031504}
   closetMiniGame: {fileID: 1645377325}
-  jumpScare: {fileID: 870418888}
 --- !u!1001 &1739790936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5069,6 +5052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockImage: {fileID: 21300000, guid: 0ead24eef2e958e46974d3345491b151, type: 3}
   unlockImage: {fileID: 21300000, guid: b63c42e2cc61e484db07909a92963111, type: 3}
+  lockComponent: {fileID: 0}
 --- !u!114 &2070040764
 MonoBehaviour:
   m_ObjectHideFlags: 0
