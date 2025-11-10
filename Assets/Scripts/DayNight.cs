@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,15 +23,7 @@ public class DayNight : MonoBehaviour
     
     public Image darkness;
     public Animator darknessAnimator;
-    [SerializeField]
-    private int nightCount;
     
-    [SerializeField]
-    private TextMeshProUGUI nightText;
-    
-    public GameObject enemyIndoors;
-    
-
     private enum timeOfDay
     {
         Day,
@@ -44,7 +35,6 @@ public class DayNight : MonoBehaviour
     {
   
         darknessAnimator = darkness.GetComponent<Animator>();
-        nightCount = 0;
     
     }
 
@@ -56,14 +46,11 @@ public class DayNight : MonoBehaviour
         {
             
             NightTime();
-            nightCount++;
-            nightText.text = "night: " + nightCount.ToString();
             currentTimer = 0;
         }
         else if (dayOrNight == timeOfDay.Night && currentTimer >= nightDuration)
         {
            
-            nightText.text = "night over";
             DayTime();  
   
             currentTimer = 0;
@@ -83,7 +70,6 @@ public class DayNight : MonoBehaviour
     void NightTime()
     {
         dayOrNight = timeOfDay.Night;
-   
         darknessAnimator.SetTrigger("Night");
         
         foreach (GameObject nightObject in nightObjects)
@@ -95,14 +81,11 @@ public class DayNight : MonoBehaviour
         {
             dayObject.SetActive(false);
         }
-        enemyIndoors.SetActive(false);
-       
     }
 
     void DayTime()
     {
              dayOrNight = timeOfDay.Day;
-        
         darknessAnimator.SetTrigger("Day");
         foreach (GameObject nightObject in nightObjects)
         {
@@ -113,6 +96,5 @@ public class DayNight : MonoBehaviour
         {
             dayObject.SetActive(true);
         }
-        enemyIndoors.SetActive(false);
     }
 }
